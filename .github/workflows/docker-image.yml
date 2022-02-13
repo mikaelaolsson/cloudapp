@@ -38,3 +38,4 @@ jobs:
       with:
           push: true
           tags: mikaelaolsson/cloudapp:dev
+          context: ./
