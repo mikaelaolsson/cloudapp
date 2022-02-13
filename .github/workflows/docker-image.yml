@@ -38,4 +38,4 @@ jobs:
       with:
           push: true
           tags: mikaelaolsson/cloudapp:dev
-          file: ./cloudapp/Dockerfile
+          file: ./CloudApp/Dockerfile
