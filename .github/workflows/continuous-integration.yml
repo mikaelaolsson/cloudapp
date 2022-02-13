@@ -53,4 +53,4 @@ jobs:
       with:
         method: service-account
         k8s-url: 20.91.216.3
-        k8s-secret: default-token-7w8x6
+        k8s-secret: ${{ secrets.KUBE_SECRET }}
