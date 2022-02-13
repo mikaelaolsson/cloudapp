@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"creationTimestamp":"2022-02-13T14:14:40Z","generation":2,"labels":{"app":"cloudapp"},"name":"cloudapp","namespace":"default","resourceVersion":"909","uid":"b428580d-cab4-41b0-8b78-9b3c0cd996ba"},"spec":{"progressDeadlineSeconds":600,"replicas":7,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"cloudapp"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"cloudapp"}},"spec":{"containers":[{"image":"mikaelaolsson/cloudapp:latest","imagePullPolicy":"Always","name":"cloudapp","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}},"status":{"availableReplicas":7,"conditions":[{"lastTransitionTime":"2022-02-13T14:14:40Z","lastUpdateTime":"2022-02-13T14:14:54Z","message":"ReplicaSet \"cloudapp-779f5cc654\" has successfully progressed.","reason":"NewReplicaSetAvailable","status":"True","type":"Progressing"},{"lastTransitionTime":"2022-02-13T14:16:12Z","lastUpdateTime":"2022-02-13T14:16:12Z","message":"Deployment has minimum availability.","reason":"MinimumReplicasAvailable","status":"True","type":"Available"}],"observedGeneration":2,"readyReplicas":7,"replicas":7,"updatedReplicas":7}}
+  creationTimestamp: "2022-02-13T14:14:40Z"
+  generation: 4
+  labels:
+    app: cloudapp
+  name: cloudapp
+  namespace: default
+  resourceVersion: "2610"
+  uid: b428580d-cab4-41b0-8b78-9b3c0cd996ba
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 7
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: cloudapp
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2022-02-13T14:44:53Z"
+      creationTimestamp: null
+      labels:
+        app: cloudapp
+    spec:
+      containers:
+      - image: mikaelaolsson/cloudapp:latest
+        imagePullPolicy: Always
+        name: cloudapp
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 7
+  conditions:
+  - lastTransitionTime: "2022-02-13T14:16:12Z"
+    lastUpdateTime: "2022-02-13T14:16:12Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2022-02-13T14:14:40Z"
+    lastUpdateTime: "2022-02-13T14:45:09Z"
+    message: ReplicaSet "cloudapp-5f6d5cbfbb" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 4
+  readyReplicas: 7
+  replicas: 7
+  updatedReplicas: 7
