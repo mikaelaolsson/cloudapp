@@ -49,7 +49,7 @@ jobs:
           file: ./CloudApp/Dockerfile
           
     - name: Kubernetes Set Context
-    - uses: azure/k8s-set-context@v2
+      uses: azure/k8s-set-context@v2
       with:
         method: service-account
         k8s-url: 20.91.216.3
