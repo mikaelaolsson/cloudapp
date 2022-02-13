@@ -77,3 +77,4 @@ jobs:
            k8s.yaml
          images: |
            mikaelaolsson/cloudapp:latest
+         strategy: RollingUpdate
