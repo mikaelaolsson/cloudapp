@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudapp-deployment
+  labels:
+    app: cloudapp
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: cloudapp
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cloudapp
+    spec:
+      containers: 
+      - name: cloudapp
+        image: mikaelaolsson/cloudapp:latest
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+          requests:
+            memory: 256Mi
+            cpu: "0.2"
+        ports: 
+        - containerPort: 80
