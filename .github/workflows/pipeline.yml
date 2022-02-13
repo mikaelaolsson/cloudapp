@@ -57,28 +57,16 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-  #   environment: 
-  #     name: "Production"
-    
-  #   steps: 
-    
-  #   - uses: azure/login@v1
-  #     with:
-  #       creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
-  #   - run: |
-  #       az webapp list --query "[?state=='Running']"
 
-  #   - name: Kubernetes Set Context
-  #     uses: azure/k8s-set-context@v2
-  #     with:
-  #       method: service-account
-  #       k8s-url: 20.91.216.3
-  #       k8s-secret: ${{ secrets.KUBE_SECRET }}
+      - name: Kubernetes Set Context
+        uses: azure/k8s-set-context@v2
+        with:
+          method: service-account
+          k8s-url: 20.91.216.3
+          k8s-secret: ${{ secrets.KUBE_SECRET }}
         
-  #   - name: Deploy to Kubernetes cluster
-  #     uses: Azure/k8s-deploy@v3.0
-  #     with:
-  #        manifests: |
-  #          ${{ github.repository }}/deployment.yaml
-  #        strategy: canary
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v3.0
+        with:
+         manifests: |
+           k8s.yaml
