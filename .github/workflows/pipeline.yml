@@ -47,7 +47,11 @@ jobs:
           push: true
           tags: mikaelaolsson/cloudapp:latest
           file: ./CloudApp/Dockerfile
-          
+  deploy:
+    # if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps: 
     - name: Kubernetes Set Context
       uses: azure/k8s-set-context@v2
       with:
