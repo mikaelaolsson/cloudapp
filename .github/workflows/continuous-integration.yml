@@ -1,12 +1,13 @@
-name: Docker Image CI
+name: Continuous Integration
 
 on:
   push:
-    branches: [ dev ]
+    branches: 
+    - dev
+    - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -31,9 +32,18 @@ jobs:
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
                 
-    - name: Building the Docker Image
+    - name: Building the Docker Image with dev-tag
+      if: github.ref == 'refs/heads/dev'
       uses: docker/build-push-action@v2.9.0
       with:
           push: true
           tags: mikaelaolsson/cloudapp:dev
+          file: ./CloudApp/Dockerfile
+
+    - name: Building the Docker Image with latest-tag
+      if: github.ref == 'refs/heads/main'
+      uses: docker/build-push-action@v2.9.0
+      with:
+          push: true
+          tags: mikaelaolsson/cloudapp:latest
           file: ./CloudApp/Dockerfile
