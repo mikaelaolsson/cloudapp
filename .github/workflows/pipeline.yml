@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: CI/CD
 
 on:
   push:
@@ -54,3 +54,9 @@ jobs:
         method: service-account
         k8s-url: 20.91.216.3
         k8s-secret: ${{ secrets.KUBE_SECRET }}
+        
+    - name: Deploy to Kubernetes cluster
+      uses: Azure/k8s-deploy@v3.0
+      with:
+         manifests: deployment.yaml
+         strategy: canary
