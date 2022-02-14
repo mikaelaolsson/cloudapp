@@ -49,17 +49,31 @@ jobs:
           tags: mikaelaolsson/cloudapp:latest
           file: ./CloudApp/Dockerfile
 
-
   deploy:
-    # if: github.ref == 'refs/heads/main'
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} 
-          # and what do i do now? :'(
+    steps:
+    - name: ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_KEY }}
+        port: ${{ secrets.SERVER_PORT }}
+        script: kubectl rollout restart deployment cloudapp
+
+  # deploy:
+  #   # if: github.ref == 'refs/heads/main'
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Login to Azure
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }} 
+  #         # and what do i do now? :'(

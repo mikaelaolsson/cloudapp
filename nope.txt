@@ -1,0 +1,5 @@
+Hej! Jag håller på med min ci/cd pipeline men har kört fast och skulle behöva lite hjälp.
+
+Än så länge innehåller min pipeline att den bygger en docker image och pushar till docker hub. (har två branches så den har olika tags för branchen) 
+
+För att kunna se det jag har ändrat så måste jag köra "kubectl rollout restart deployment cloudapp" i terminalen, och det vill jag ju ska ske automatiskt. Men all min googling ger mig inget svar på hur jag gör det? Hur går jag vidare? Känns som att jag måste ha missat något väldigt viktigt.
