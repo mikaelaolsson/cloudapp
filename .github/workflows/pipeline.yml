@@ -50,11 +50,11 @@ jobs:
           file: ./CloudApp/Dockerfile
   
   pull-request:
+    if: github.ref == 'refs/heads/dev'
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        if: github.ref == 'refs/heads/dev'
+      - name: Checkout        
         uses: actions/checkout@v2
 
       - name: Create Pull Request
@@ -77,7 +77,6 @@ jobs:
         key: ${{ secrets.SERVER_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         script: kubectl rollout restart deployment cloudapp
-
   # deploy:
   #   # if: github.ref == 'refs/heads/main'
   #   needs: build
