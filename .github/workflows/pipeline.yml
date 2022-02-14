@@ -62,19 +62,25 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Set context from Kubeconfig
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Kubernetes Set Context
-        uses: azure/k8s-set-context@v2
-        with:
-          method: service-account
-          k8s-url: 20.91.216.3
-          k8s-secret: ${{ secrets.KUBE_SECRET }}
+      # - name: Kubernetes Set Context
+      #   uses: azure/k8s-set-context@v2
+      #   with:
+      #     method: service-account
+      #     k8s-url: 20.91.216.3
+      #     k8s-secret: ${{ secrets.KUBE_SECRET }}
         
-      - name: Deploy to Kubernetes
-        uses: Azure/k8s-deploy@v1
-        with:
-         manifests: |
-           k8s.yaml
-         images: |
-           mikaelaolsson/cloudapp:latest
-         strategy: RollingUpdate
+      # - name: Deploy to Kubernetes
+      #   uses: Azure/k8s-deploy@v1
+      #   with:
+      #    manifests: |
+      #      k8s.yaml
+      #    images: |
+      #      mikaelaolsson/cloudapp:latest
+      #    strategy: RollingUpdate
