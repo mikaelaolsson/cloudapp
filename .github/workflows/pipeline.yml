@@ -1,10 +1,11 @@
-name: Continuous Integration
+name: CI/CD
 
 on:
   push:
     branches: 
     - dev
     - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -47,3 +48,18 @@ jobs:
           push: true
           tags: mikaelaolsson/cloudapp:latest
           file: ./CloudApp/Dockerfile
+
+
+  deploy:
+    # if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }} 
+          # and what do i do now? :'(
