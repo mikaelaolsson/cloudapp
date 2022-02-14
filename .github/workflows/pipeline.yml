@@ -7,13 +7,6 @@ on:
     - main
   workflow_dispatch:
 
-env:
-  REGISTRY_NAME: Docke
-  CLUSTER_NAME: cluster
-  CLUSTER_RESOURCE_GROUP: cloud-team
-  NAMESPACE: default
-  APP_NAME: cloudapp
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -104,7 +97,7 @@ jobs:
         uses: Azure/k8s-deploy@v1
         with:
          manifests: |
-           ${{ github.workspace }}/manifest/k8s.yaml
+           ./manifest/k8s.yaml
          images: |
            mikaelaolsson/cloudapp:latest
          strategy: RollingUpdate
