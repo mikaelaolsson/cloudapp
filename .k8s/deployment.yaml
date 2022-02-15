@@ -25,23 +25,25 @@ spec:
          image: mikaelaolsson/cloudapp:latest
          ports:
          - containerPort: 80
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name:  cloud-service
-# spec:
-#   selector:
-#     app:  cloudapp
-#   type:  LoadBalancer 
-#   ports:
-#   - name:  http
-#     port:  80
-#     targetPort:  80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name:  cloud-service
+spec:
+  selector:
+    app:  cloudapp
+  type:  LoadBalancer 
+  ports:
+  - name:  http
+    port:  80
+    targetPort:  80
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
+ namespace: default
  name: cloudapp
 spec:
  scaleTargetRef:
