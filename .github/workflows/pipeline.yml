@@ -77,7 +77,7 @@ jobs:
     #     key: ${{ secrets.SERVER_KEY }}
     #     port: ${{ secrets.SERVER_PORT }}
     #     script: kubectl rollout restart deployment cloudapp
-  deploy:
+  fluxctl:
     if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
@@ -95,6 +95,13 @@ jobs:
           resource-group: "cloud-team"
           cluster-name: "cloudapp"
       
+      - name: Setup fluxctl
+        uses: fluxcd/fluxctl-action@master
+      - name: Synchronize cluster
+        env:
+          FLUX_FORWARD_NAMESPACE: flux
+        run: fluxctl sync
+
     #   - name: Kubernetes deploy
     #     uses: azure/k8s-deploy@v3.0
     #     with:
