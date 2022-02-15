@@ -77,23 +77,23 @@ jobs:
     #     key: ${{ secrets.SERVER_KEY }}
     #     port: ${{ secrets.SERVER_PORT }}
     #     script: kubectl rollout restart deployment cloudapp
-  # deploy:
-  #   # if: github.ref == 'refs/heads/main'
-  #   needs: build
-  #   runs-on: ubuntu-latest
-    # steps:
-    #   - name: Checkout
-    #     uses: actions/checkout@v2
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    #   - name: Login to Azure
-    #     uses: azure/login@v1
-    #     with:
-    #       creds: ${{ secrets.AZURE_CREDENTIALS }} 
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }} 
       
-    #   - uses: azure/aks-set-context@v2.0
-    #     with:
-    #       resource-group: "cloud-team"
-    #       cluster-name: "cloudapp"
+      - uses: azure/aks-set-context@v2.0
+        with:
+          resource-group: "cloud-team"
+          cluster-name: "cloudapp"
       
     #   - name: Kubernetes deploy
     #     uses: azure/k8s-deploy@v3.0
