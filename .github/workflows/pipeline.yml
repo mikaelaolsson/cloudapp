@@ -63,10 +63,10 @@ jobs:
           destination_branch: "main"
           github_token: ${{ secrets.PAT }}
 
-  deploy:
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+  # deploy:
+  #   needs: build
+  #   if: github.ref == 'refs/heads/main'
+  #   runs-on: ubuntu-latest
 
     # steps:
     # - name: ssh
