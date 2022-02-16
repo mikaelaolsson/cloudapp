@@ -76,5 +76,5 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_KEY }}
         port: ${{ secrets.SERVER_PORT }}
-        timeout: 2min
+        timeout: 2m
         script: kubectl rollout restart deployment cloudapp
