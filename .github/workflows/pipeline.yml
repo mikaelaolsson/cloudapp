@@ -76,7 +76,7 @@ jobs:
         id: connect_vpn
         with:
           PING_URL: ${{ secrets.SERVER_HOST }}
-          FILE_OVPN: '.github/vpn/config.ovpn'
+          FILE_OVPN: './.github/vpn/config.ovpn'
           SECRET: ${{ secrets.SECRET_USERNAME_PASSWORD }}
         env:
           CA_CRT: ${{ secrets.CA_CRT}}
