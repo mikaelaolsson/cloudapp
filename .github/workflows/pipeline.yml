@@ -65,8 +65,8 @@ jobs:
 
 
   deploy: 
-    #needs: build
-   # if: github.ref == 'refs/heads/main'
+    needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -90,7 +90,7 @@ jobs:
           password: ${{ secrets.VPN_PASSWORD }}
           client_key: ${{ secrets.USER_KEY }}
 
-      - name: Run ssh command via using private key
+      - name: Run ssh command using private key
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
