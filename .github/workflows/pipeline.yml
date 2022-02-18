@@ -65,8 +65,8 @@ jobs:
 
 
   deploy: 
-    needs: build
-    if: github.ref == 'refs/heads/main'
+    #needs: build
+   # if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -92,7 +92,3 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: kubectl rollout restart deployment cloudapp
-
-      - name: Stäng vpn
-        if: always()
-        run: sudo killall openvpn
