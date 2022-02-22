@@ -48,7 +48,7 @@ jobs:
       with:
           push: true
           #tags: ${{ steps.meta.outputs.tags }}-$VERSION
-          tags: $VERSION
+          tags: mikaelaolsson/cloudapp:$VERSION
           file: ./CloudApp/Dockerfile
 
 
