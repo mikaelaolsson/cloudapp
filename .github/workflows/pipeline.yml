@@ -48,6 +48,9 @@ jobs:
 
     - name: Building the Docker Image
       run: docker build -t mikaelaolsson/cloudapp:$VERSION .
+      with:
+         file: ./CloudApp/Dockerfile
+
 
     - name: Pushing the Docker Image
       run: docker push mikaelaolsson/cloudapp:$VERSION
