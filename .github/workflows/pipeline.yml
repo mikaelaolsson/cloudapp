@@ -39,7 +39,6 @@ jobs:
             password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Building the Docker Image
-      #if: github.ref == 'refs/heads/dev'
       uses: docker/build-push-action@v2.9.0
       with:
           push: true
