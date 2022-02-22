@@ -54,7 +54,7 @@ jobs:
 
 
     - name: Pushing the Docker Image
-      run: docker push mikaelaolsson/cloudapp:$VERSION
+      run: docker push ${{ steps.meta.outputs.tags }}-$VERSION
 
 
 
