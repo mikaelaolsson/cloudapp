@@ -14,6 +14,14 @@ jobs:
     - name: Check in to branch
       uses: actions/checkout@v2
 
+    - name: Set version variable
+      run: echo "VERSION=$(echo ${GIT_MESSAGE} | grep -Po '(?<=--version=)[^;]+')" >> $GITHUB_ENV
+      env:
+        GIT_MESSAGE: ${{github.event.head_commit.message}}
+
+    - name: Test
+      run: echo $VERSION
+
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v3
@@ -38,12 +46,20 @@ jobs:
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Building the Docker Image with tag
-      uses: docker/build-push-action@v2.9.0
-      with:
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          file: ./CloudApp/Dockerfile
+    - name: Building the Docker Image
+      run: docker build -t mikaelaolsson/cloudapp:$VERSION .
+
+    - name: Pushing the Docker Image
+      run: docker push mikaelaolsson/cloudapp:$VERSION
+
+
+
+    # - name: Building the Docker Image with tag
+    #   uses: docker/build-push-action@v2.9.0
+    #   with:
+    #       push: true
+    #       tags: ${{ steps.meta.outputs.tags }}
+    #       file: ./CloudApp/Dockerfile
 
 
     # - name: Building the Docker Image with dev-tag
