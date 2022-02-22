@@ -52,13 +52,12 @@ jobs:
     - name: Building the Docker Image
       run: docker build -t ${{ steps.meta.outputs.tags }}-$VERSION .
 
-
     - name: Pushing the Docker Image
       run: docker push ${{ steps.meta.outputs.tags }}-$VERSION
 
 
 
-    # - name: Building the Docker Image with tag
+    ## - name: Building the Docker Image with tag
     #   uses: docker/build-push-action@v2.9.0
     #   with:
     #       push: true
