@@ -30,28 +30,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: cloudapp
-  name: cloudapp
   namespace: default
+  name:  cloud-service
 spec:
-  clusterIP: 10.107.113.156
-  clusterIPs:
-  - 10.107.113.156
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
-  ports:
-  - nodePort: 30610
-    port: 80
-    protocol: TCP
-    targetPort: 80
   selector:
-    app: cloudapp
-  sessionAffinity: None
-  type: NodePort 
+    app:  cloudapp
+  type:  NodePort
+  ports:
+  - name:  http
+    port:  80
+    targetPort:  80 
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
