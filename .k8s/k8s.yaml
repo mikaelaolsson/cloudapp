@@ -23,6 +23,10 @@ spec:
        containers: 
        - name: cloudapp
          image: mikaelaolsson/cloudapp:latest
+         resources:
+           limits: 
+             cpu: 100m
+             memory: 200Mi
          imagePullPolicy: Always
          ports:
          - containerPort: 80
